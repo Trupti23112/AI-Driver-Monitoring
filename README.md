@@ -43,6 +43,8 @@ The simulation cycles through these states to demonstrate how an intelligent dri
 
 ## 📊 Dashboard
 
+![SENTINEL AI Dashboard](Dashboard.png)
+
 The dashboard provides:
 
 - Driver camera monitoring
@@ -60,7 +62,7 @@ The dashboard provides:
 ---
 
 ## 📈 Analytics
-
+![SENTINEL AI Analytics](Analytics.png)
 The analytics section provides performance insights including:
 
 - Total alerts
@@ -125,7 +127,17 @@ This GitHub version contains an interactive simulation of the monitoring and ale
 The displayed camera detections and system-performance values are simulated/demo values and should not be interpreted as measurements from an actual vehicle, embedded device, or production safety system.
 
 ---
+## 📋 System Logs
 
+![SENTINEL AI Logs](Logs.png)
+
+The logs section records important system events such as:
+
+- Pedestrian detection
+- Driver distraction
+- Driver drowsiness
+- Alert severity
+- Event timestamps
 ## 🔮 Future Improvements
 
 - Integrate real-time webcam input
