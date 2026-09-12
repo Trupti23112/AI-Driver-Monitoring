@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SENTINEL AI | Driver Monitoring System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-icon">◉</div>
+
+            <div>
+                <h1>SENTINEL AI</h1>
+                <p>DRIVER MONITORING SYSTEM</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <span class="status critical" id="systemStatus">
+                CRITICAL
+            </span>
+
+            <button class="btn primary" id="simulationBtn">
+                ◉ Start Simulation
+            </button>
+
+            <button class="btn" id="analyticsBtn">
+                ▥ Analytics
+            </button>
+
+            <button class="btn" id="logsBtn">
+                〽 Logs
+            </button>
+        </div>
+    </header>
+
+
+    <!-- MAIN DASHBOARD -->
+    <main id="dashboardPage">
+
+        <!-- CAMERA SECTION -->
+        <section class="camera-grid">
+
+            <!-- DRIVER CAMERA -->
+            <div class="camera-card">
+                <div class="camera-label">DRIVER CAM</div>
+                <div class="recording">● REC</div>
+
+                <div class="camera-content driver-camera">
+                    <div class="detection-box face-box"></div>
+                    <div class="detection-label face-label">
+                        FACE DETECTED 98%
+                    </div>
+
+                    <div class="eye-box left-eye"></div>
+                    <div class="eye-box right-eye"></div>
+                </div>
+
+                <div class="camera-info">
+                    FPS: 30 &nbsp;|&nbsp; RES: 1920x1080
+                </div>
+            </div>
+
+
+            <!-- ROAD CAMERA -->
+            <div class="camera-card">
+                <div class="camera-label">ROAD CAM</div>
+                <div class="recording">● REC</div>
+
+                <div class="camera-content road-camera">
+
+                    <div class="detection-box pedestrian-box"></div>
+                    <div class="detection-label pedestrian-label">
+                        PEDESTRIAN 96%
+                    </div>
+
+                    <div class="detection-box vehicle-box"></div>
+                    <div class="detection-label vehicle-label">
+                        VEHICLE 92%
+                    </div>
+
+                </div>
+
+                <div class="camera-info">
+                    FPS: 30 &nbsp;|&nbsp; RES: 1920x1080
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- DASHBOARD GRID -->
+        <section class="dashboard-grid">
+
+            <!-- LEFT -->
+            <div class="left-column">
+
+                <!-- SYSTEM PERFORMANCE -->
+                <div class="panel">
+                    <div class="panel-title">SYSTEM PERFORMANCE</div>
+
+                    <div class="metrics-grid">
+
+                        <div class="metric-card">
+                            <span>INFERENCE</span>
+                            <strong id="inference">21.6</strong>
+                            <small>ms</small>
+                            <div class="mini-chart"></div>
+                        </div>
+
+                        <div class="metric-card">
+                            <span>CPU TEMP</span>
+                            <strong id="cpuTemp">62.8</strong>
+                            <small>°C</small>
+                            <div class="mini-chart"></div>
+                        </div>
+
+                        <div class="metric-card">
+                            <span>POWER</span>
+                            <strong id="power">3.7</strong>
+                            <small>W</small>
+                            <div class="mini-chart"></div>
+                        </div>
+
+                        <div class="metric-card">
+                            <span>LATENCY</span>
+                            <strong id="latency">18.3</strong>
+                            <small>ms</small>
+                            <div class="mini-chart"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+            <aside class="right-column">
+
+                <!-- TRIP STATUS -->
+                <div class="panel trip-panel">
+                    <div class="panel-title">TRIP STATUS</div>
+
+                    <p id="tripStatus">No active trip</p>
+
+                    <button class="full-btn" id="tripBtn">
+                        Start Trip
+                    </button>
+                </div>
+
+
+                <!-- SUMMARY CARDS -->
+                <div class="summary-grid">
+
+                    <div class="summary-card">
+                        <span>ALERTS</span>
+                        <strong id="alertCount">7</strong>
+                    </div>
+
+                    <div class="summary-card">
+                        <span>INCIDENTS</span>
+                        <strong id="incidentCount">1</strong>
+                    </div>
+
+                    <div class="summary-card">
+                        <span>ATTENTION</span>
+                        <strong id="attention">100%</strong>
+                    </div>
+
+                    <div class="summary-card">
+                        <span>TRIPS</span>
+                        <strong id="tripCount">3</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- LIVE ALERTS -->
+                <div class="panel alerts-panel">
+                    <div class="panel-title">LIVE ALERTS</div>
+
+                    <div id="alertsList">
+
+                        <div class="alert critical-alert">
+                            <strong>Pedestrian detected in path</strong>
+                            <small>20:56:40</small>
+                        </div>
+
+                        <div class="alert warning-alert">
+                            <strong>Driver distraction detected</strong>
+                            <small>20:56:28</small>
+                        </div>
+
+                        <div class="alert critical-alert">
+                            <strong>Driver drowsiness detected</strong>
+                            <small>20:56:16</small>
+                        </div>
+
+                    </div>
+                </div>
+
+            </aside>
+
+        </section>
+
+    </main>
+
+
+    <!-- ANALYTICS PAGE -->
+    <section id="analyticsPage" class="hidden">
+
+        <div class="page-header">
+            <button class="btn" id="backFromAnalytics">← Back</button>
+
+            <div>
+                <h2>Analytics</h2>
+                <p>PERFORMANCE INSIGHTS</p>
+            </div>
+        </div>
+
+        <div class="analytics-cards">
+
+            <div class="analytics-card">
+                <span>TOTAL ALERTS</span>
+                <strong>7</strong>
+                <small>All time</small>
+            </div>
+
+            <div class="analytics-card">
+                <span>CRITICAL</span>
+                <strong>4</strong>
+                <small>High severity</small>
+            </div>
+
+            <div class="analytics-card">
+                <span>AVG ATTENTION</span>
+                <strong>100%</strong>
+                <small>Last 10 trips</small>
+            </div>
+
+            <div class="analytics-card">
+                <span>SYSTEM UPTIME</span>
+                <strong>99.8%</strong>
+                <small>Operational</small>
+            </div>
+
+        </div>
+
+        <div class="chart-grid">
+
+            <div class="chart-panel">
+                <h3>ALERTS BY TYPE</h3>
+
+                <div class="bar-chart">
+                    <div><span style="height:80%"></span><label>Obstacle</label></div>
+                    <div><span style="height:80%"></span><label>Distraction</label></div>
+                    <div><span style="height:80%"></span><label>Drowsiness</label></div>
+                    <div><span style="height:40%"></span><label>Test Alert</label></div>
+                </div>
+            </div>
+
+
+            <div class="chart-panel">
+                <h3>ALERTS BY SEVERITY</h3>
+
+                <div class="bar-chart">
+                    <div><span style="height:100%"></span><label>Critical</label></div>
+                    <div><span style="height:70%"></span><label>Warning</label></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="chart-panel attention-chart">
+            <h3>DRIVER ATTENTION TREND</h3>
+
+            <div class="attention-line">
+                <span>100%</span>
+                <span>100%</span>
+                <span>100%</span>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- LOGS PAGE -->
+    <section id="logsPage" class="hidden">
+
+        <div class="page-header">
+            <button class="btn" id="backFromLogs">← Back</button>
+
+            <div>
+                <h2>Logs</h2>
+                <p>SYSTEM ACTIVITY</p>
+            </div>
+        </div>
+
+        <div class="panel logs-panel">
+
+            <div class="log-entry">
+                <span>20:56:40</span>
+                <strong>Pedestrian detected in path</strong>
+                <em>CRITICAL</em>
+            </div>
+
+            <div class="log-entry">
+                <span>20:56:28</span>
+                <strong>Driver distraction detected</strong>
+                <em>WARNING</em>
+            </div>
+
+            <div class="log-entry">
+                <span>20:56:16</span>
+                <strong>Driver drowsiness detected</strong>
+                <em>CRITICAL</em>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>SENTINEL AI • Driver Safety Intelligence System</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
